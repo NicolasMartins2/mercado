@@ -178,6 +178,181 @@ button {
 }
 
 
+
+
+
+
+
+
+
+
+/* Estilos principais da seção */
+/* Estilos principais da seção */
+.promo-section {
+  background: url('/img/fundo promo.jpg') no-repeat center center; /* Adiciona a imagem de fundo */
+  background-size: cover; /* Faz a imagem cobrir toda a área */
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  position: relative; /* Para suportar camadas adicionais */
+  z-index: 1;
+}
+
+/* Adiciona um overlay para melhorar o contraste do texto */
+.promo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca o overlay atrás do conteúdo */
+}
+
+.promo-content {
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais destacada */
+  animation: fadeIn 1.5s ease-out;
+}
+
+
+.promo-content {
+  max-width: 1000px;
+  background: rgba(255, 255, 255, 0.1); /* Fundo semi-transparente */
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Sombra mais destacada */
+  animation: fadeIn 1.5s ease-out;
+}
+
+.promo-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.promo-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
+  color: #f8f8f8;
+}
+
+.promo-features {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.feature {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  flex: 1 1 250px;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.feature h3 {
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  color: #f0f0f0;
+  font-size: 1rem;
+}
+
+.promo-button {
+  background: #ffffff;
+  color: #0044cc;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.promo-button:hover {
+  background: #ff3333;
+  color: #ffffff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.sponsors {
+  text-align: center;
+  padding: 20px;
+}
+
+.sponsors h2 {
+  font-size: 2em;
+  color: red;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.sponsor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.sponsor-container img {
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s;
+}
+
+.sponsor-container img:hover {
+  transform: scale(1.1);
+}
+
+
+
 </style>
 <body>
     <header class="header">
@@ -207,6 +382,55 @@ button {
             </div>
         </div>
         <br><br>
+
+
+        <section class="promo-section">
+            <div class="promo-content">
+              <h1 class="promo-title">Super Promoções da Semana!</h1>
+              <p class="promo-subtitle">Aproveite descontos exclusivos e torne suas compras ainda mais especiais no Supermercado Nativa.</p>
+              <div class="promo-features">
+                <div class="feature">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfu7RtwNxc2IIcZH96WXZ9mDZ02u7AZH6h_1Fwgpge5gYPbHKg2W3RF3pb7ly6ixc-7rY&usqp=CAU" alt="Descontos" class="feature-icon">
+                  <h3>Descontos Especiais</h3>
+                  <p>Produtos selecionados com até <b>50% OFF</b>.</p>
+                </div>
+                <div class="feature">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHx7Bh22-WPREVSANtXFZ8vcrk8SKZX8FatA&s" alt="Qualidade" class="feature-icon">
+                  <h3>Qualidade Garantida</h3>
+                  <p>Os melhores produtos para sua família.</p>
+                </div>
+                <div class="feature">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVhdXq2eHkmshuQyxFLCbajlan3iJrC4smdA&s" alt="Variedade" class="feature-icon">
+                  <h3>Variedade Completa</h3>
+                  <p>Ofertas em todas as categorias, de alimentos a cuidados pessoais.</p>
+                </div>
+              </div>
+              <a href="#offers" class="promo-button">Confira as Ofertas</a>
+            </div>
+          </section>
+
+
+          <section class="sponsors">
+            <h2>Patrocinadores</h2>
+            <div class="sponsor-container">
+              <img src="/img/logo mec.png" alt="Burger Logo">
+              <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/pepsi_logo_icon_168910.png" alt="Pizza Logo">
+              <img src="https://logodownload.org/wp-content/uploads/2014/04/coca-cola-logo-2.png" alt="Slice Logo" style="border-radius: 50%;">
+              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQDk00kOEB9TKfDuRxQVn_U2YEVfUOjvoyZpMiUx8RSHCNXSsFDst_NtbCxB8agqDGoRXN2YC2jPGmoX7h4-zrHpRE9BVjyU-CexIf2H7SGO9ucwZkFhnCeaNYuDa4pk6EB6RUbAiBGg3Fk14FV9Di-hOSNY9qPPKfScGETD4IhdOuVmQnof6ZzTmkQT8/s300/ifood%20logo.jpg" alt="Fast Food Logo" style="border-radius: 50%;">
+            </div>
+          </section>
+          
+          
+
+
+
+
+
+
+
+
+
+
 
         <div class="main-content" id="main-content">
 
