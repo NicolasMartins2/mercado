@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/suporte.css">
+    <link rel="stylesheet" href="styles.css">
     <title>Pagina inicial</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
         <div class="header-bottom-wrapper">
             <button class="menu-toggle">☰ Menu</button>
             <div class="header-bottom">
-                <a href="/views/promocoes.html" class="promocoes" style="color: white;">Promoções</a>
+                <a href="/views/promocoes.html" class="promocoes" style="color: rgb(255, 255, 255);">Promoções</a>
                 <a href="/views/bebidas.html">Bebidas</a>
                 <a href="/views/alimentos.html">Alimentos Básicos</a>
                 <a href="/views/limpezas.html">Produtos de Limpeza</a>
@@ -45,49 +46,114 @@
     </header>
     <br>
 
-<main>
-    <div class="container">
-        <div class="contact-info">
-            <div>
-                <i class="icon">📍</i>
-                <p>121 Rock Street, 21 Avenue, New York, NY 92103-9000</p>
-            </div>
-            <div>
-                <i class="icon">📞</i>
-                <p>001-234-5678<br>001-987-7654</p>
-            </div>
-            <div>
-                <i class="icon">✉️</i>
-                <p>test@info.com</p>
-            </div>
-            <div>
-                <i class="icon">📘</i>
-                <p>@businessinfo</p>
+    <section style="background-color: #ffffff; padding: 60px 20px;">
+        <!-- Título da Página Melhorado -->
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="
+                color: #003366;
+                font-size: 3.5em;
+                font-family: 'Arial', sans-serif;
+                font-weight: bold;
+                text-transform: uppercase;
+                letter-spacing: 5px;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 10px;
+                transition: color 0.3s ease, transform 0.3s ease;
+            ">
+                Suporte Nativa
+                <span style="position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: #d32f2f; border-radius: 5px;"></span>
+            </h2>
+            <p style="color: #d32f2f; font-size: 1.2em; font-family: Arial, sans-serif; transition: transform 0.3s ease;">
+                Estamos aqui para ajudá-lo com qualquer dúvida. Sinta-se à vontade para entrar em contato!
+            </p>
+        </div>
+    
+        <!-- Formulário de Contato -->
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h3 style="color: #003366; font-size: 2em; font-family: Arial, sans-serif;">Entre em Contato</h3>
+            <form action="#" method="post" style="max-width: 600px; margin: 0 auto; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);">
+                <div style="margin-bottom: 20px;">
+                    <label for="nome" style="font-weight: bold; color: #003366; font-size: 1.1em;">Nome</label><br>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required
+                        style="width: 100%; padding: 15px; border: 2px solid #003366; border-radius: 10px; font-size: 1em; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="email" style="font-weight: bold; color: #003366; font-size: 1.1em;">E-mail</label><br>
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required
+                        style="width: 100%; padding: 15px; border: 2px solid #003366; border-radius: 10px; font-size: 1em; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="mensagem" style="font-weight: bold; color: #003366; font-size: 1.1em;">Mensagem</label><br>
+                    <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem" required
+                        style="width: 100%; padding: 15px; border: 2px solid #003366; border-radius: 10px; font-size: 1em; height: 150px; box-sizing: border-box;"></textarea>
+                </div>
+                <div style="margin-top: 30px;">
+                    <button type="submit" style="background-color: #d32f2f; color: white; padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1em; transition: background-color 0.3s;">
+                        Enviar Mensagem
+                    </button>
+                </div>
+            </form>
+        </div>
+    
+        <!-- FAQ -->
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h3 style="color: #003366; font-size: 2em; font-family: Arial, sans-serif;">Perguntas Frequentes (FAQ)</h3>
+            <div id="faq" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <div style="margin-bottom: 25px; border-bottom: 1px solid #003366; padding-bottom: 10px;">
+                    <button onclick="toggleFAQ(0)" style="background-color: #003366; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; text-align: left; font-size: 1.1em; position: relative; transition: background-color 0.3s;">
+                        Como posso fazer um pedido?
+                        <span id="icon-0" style="position: absolute; right: 20px; top: 20px; transition: transform 0.3s;">
+                            &#9660;
+                        </span>
+                    </button>
+                    <div id="faq-answer-0" style="display: none; padding: 10px; border: 2px solid #003366; border-radius: 10px; background-color: #f7f7f7;">
+                        Para fazer um pedido, basta navegar pelo nosso catálogo, adicionar os itens ao carrinho e seguir para o checkout.
+                    </div>
+                </div>
+                <div style="margin-bottom: 25px; border-bottom: 1px solid #003366; padding-bottom: 10px;">
+                    <button onclick="toggleFAQ(1)" style="background-color: #003366; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; text-align: left; font-size: 1.1em; position: relative; transition: background-color 0.3s;">
+                        Quais são os métodos de pagamento disponíveis?
+                        <span id="icon-1" style="position: absolute; right: 20px; top: 20px; transition: transform 0.3s;">
+                            &#9660;
+                        </span>
+                    </button>
+                    <div id="faq-answer-1" style="display: none; padding: 10px; border: 2px solid #003366; border-radius: 10px; background-color: #f7f7f7;">
+                        Aceitamos cartões de crédito, débito e pagamentos via PayPal.
+                    </div>
+                </div>
+                <div style="margin-bottom: 25px; padding-bottom: 10px;">
+                    <button onclick="toggleFAQ(2)" style="background-color: #003366; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; text-align: left; font-size: 1.1em; position: relative; transition: background-color 0.3s;">
+                        Como posso acompanhar meu pedido?
+                        <span id="icon-2" style="position: absolute; right: 20px; top: 20px; transition: transform 0.3s;">
+                            &#9660;
+                        </span>
+                    </button>
+                    <div id="faq-answer-2" style="display: none; padding: 10px; border: 2px solid #003366; border-radius: 10px; background-color: #f7f7f7;">
+                        Após o envio, enviaremos um código de rastreio para que você possa acompanhar o status do seu pedido.
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="content">
-            <div class="map">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.956747580207!2d-74.00601548459464!3d40.71277537932892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQyJzQ2LjAiTiA3NMKwMDBNJzAwLjAiVw!5e0!3m2!1sen!2sus!4v1617907290752!5m2!1sen!2sus" 
-                    width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-
-            <div class="form-container">
-                <h2>ENVIE-NOS MENSAGEM</h2>
-                <p>Texto de exemplo. Clique para selecionar a caixa de texto.</p>
-                <form action="#" method="post">
-                    <input type="text" id="name" name="name" placeholder="Digite seu nome" required>
-                    <input type="email" id="email" name="email" placeholder="Digite um e-mail válido" required>
-                    <textarea id="message" name="message" placeholder="Digite sua mensagem" required></textarea>
-                    <button type="submit"  class="search" onclick="chamabtn()">Enviar</button>
-                </form>
-            </div>
+    
+        <!-- Mapa -->
+        <div style="text-align: center;">
+            <h3 style="color: #003366; font-size: 2em; font-family: Arial, sans-serif;">Encontre-nos</h3>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.7957372201174!2d-46.65528198503449!3d-23.550520774595084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce594122b0b5fd%3A0x849c1ec7b9b60473!2sAv.%20Paulista%2C%201230%20-%20Bela%20Vista%2C%20São%20Paulo%20-%20SP%2C%2001305-100!5e0!3m2!1spt-BR!2sbr!4v1699184538199!5m2!1spt-BR!2sbr"
+                width="80%" height="400" style="border: 0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-    </div>
-</main>
+    </section>
+    
 
+    
+    
 
+    
+    
+    
+    
+      
     <footer>
       <div class="container-footer">
           <div class="row-footer">
@@ -146,18 +212,25 @@
               <!--end footer col-->
           </div>
       </div>
+      
   </footer>
 
 
 
 
-
-  
+  <script src="script.js"></script>
   <script>
-    function chamabtn(){
-      alert('Sua mensagem foi enviada!!')
+    function toggleFAQ(index) {
+        var answer = document.getElementById("faq-answer-" + index);
+        var icon = document.getElementById("icon-" + index);
+        if (answer.style.display === "none") {
+            answer.style.display = "block";
+            icon.style.transform = "rotate(180deg)";
+        } else {
+            answer.style.display = "none";
+            icon.style.transform = "rotate(0deg)";
+        }
     }
-  </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</script>
 </body>
 </html>

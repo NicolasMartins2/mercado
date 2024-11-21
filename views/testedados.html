@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/menu-adm.css">
+    <title>Produtos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        main {
+    margin-left: 250px; /* Deixa espaço para a sidebar */
+    padding: 20px;
+    background-color: #f5f5f5; /* Cor de fundo leve */
+    height: 100vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 0; /* O conteúdo ocupa 100% quando a sidebar está escondida */
+    }
+ }
+    </style>
+</head>
+<body>
+     <!-- Botão de toggle do menu -->
+     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+     <!-- Menu lateral -->
+     <div class="sidebar" id="sidebar">
+         <h2>Admin</h2>
+         <ul>
+             <li><a href="/views/dashboardAdmin.html">Dashboard</a></li>
+             <li><a href="/views/relatorio.html">Relatórios</a></li>
+             <li><a href="/views/usuarios-cadastrados.html">Usuários Cadastrados</a></li>
+             <li><a href="/views/testedados.html">Tabela de Estoque</a></li>
+             <li><a href="/views/adicionar-produto.html">Adicionar Produtos</a></li>
+             <li><a href="/views/form.html">Repositório</a></li>
+             <li><a href="/">Site</a></li>
+            
+         </ul>
+     </div>
+
+     <main>
+    <h1>Produtos Disponíveis</h1>
+
+  
+        <table id="produtos-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os produtos serão exibidos aqui -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+
+
+        // Função para alternar a visibilidade da barra lateral
+        function toggleMenu() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+    
+
+        // Função para buscar os produtos do servidor
+        async function fetchProdutos() {
+            try {
+                const response = await fetch('/api/produtos');
+                const produtos = await response.json();
+
+                // Seleciona o corpo da tabela onde os produtos serão exibidos
+                const tableBody = document.querySelector('#produtos-table tbody');
+
+                // Limpa qualquer conteúdo existente na tabela
+                tableBody.innerHTML = '';
+
+                // Preenche a tabela com os dados dos produtos
+                produtos.forEach(produto => {
+                    const row = document.createElement('tr');
+                    
+                    row.innerHTML = `
+                        <td>${produto.id}</td>
+                        <td>${produto.nome}</td>
+                        <td>${produto.categoria}</td>
+                        <td>R$ ${produto.preco}</td>
+                        <td>${produto.estoque}</td>
+                    `;
+
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro ao buscar produtos:', error);
+            }
+        }
+
+        // Chama a função assim que a página carregar
+        window.onload = fetchProdutos;
+    </script>
+</body>
+</html>

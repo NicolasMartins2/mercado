@@ -1,29 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/3d7100509d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/menu-adm.css">
     <title>Lista de Produtos</title>
 </head>
 <style>
-    * {
-        margin: 0;
-    }
+   
     body {
         font-family: sans-serif;
     }
     
-    header {
-        background-color: rgb(247, 67, 67);
-        padding: 10px;
-        color: white;
-        text-align: center;
-    }
+
 
     main {
-        padding: 30px 50px;
+    margin-left: 250px; /* Deixa espaço para a sidebar */
+    padding: 20px;
+    background-color: #f5f5f5; /* Cor de fundo leve */
+    height: 100vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 0; /* O conteúdo ocupa 100% quando a sidebar está escondida */
     }
+ }
     .card {
         padding: 1rem;
         margin-top: 1rem;
@@ -75,9 +79,24 @@
 </style>
 
 <body>
-    <header>
-        <h1>Nativa Supermarket</h1>
-    </header> 
+     <!-- Botão de toggle do menu -->
+     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+     <!-- Menu lateral -->
+     <div class="sidebar" id="sidebar">
+         <h2>Admin</h2>
+         <ul>
+             <li><a href="/views/dashboardAdmin.html">Dashboard</a></li>
+             <li><a href="/views/relatorio.html">Relatórios</a></li>
+             <li><a href="/views/usuarios-cadastrados.html">Usuários Cadastrados</a></li>
+             <li><a href="/views/testedados.html">Tabela de Estoque</a></li>
+             <li><a href="/views/adicionar-produto.html">Adicionar Produtos</a></li>
+             <li><a href="/views/form.html">Repositório</a></li>
+             <li><a href="/">Site</a></li>
+            
+         </ul>
+     </div>
+  
 
     <main> 
         <div class="title">
@@ -100,10 +119,18 @@
             </div>
             <div class="lineInput">
                 <label>Categoria</label>
-                <input type="text" id="categoria" placeholder="Ex: Alimentos Básicos">
+                <select id="categoria">
+                    <option value="">Selecione uma categoria</option>
+                    <option value="Alimentos Básicos">Alimentos Básicos</option>
+                    <option value="Limpeza">Limpeza</option>
+                    <option value="Higiene">Higiene</option>
+                    <option value="Bebidas">Bebidas</option>
+                    <!-- Adicione mais opções conforme necessário -->
+                </select>
             </div>
+
             <button onclick="produto.adicionarItem()">Adicionar</button> <!-- Botão para adicionar à lista temporária -->
-            <button onclick="produto.salvarNoBanco()">Salvar no Banco de Dados</button> <!-- Botão para salvar todos os itens -->
+            <button onclick="produto.salvarNoBanco()">Salvar</button> <!-- Botão para salvar todos os itens -->
             <button onclick="produto.cancelar()">Cancelar</button>
         </div>
 
@@ -134,6 +161,15 @@
     </main>
 
     <script>
+
+
+        // Função para alternar a visibilidade da barra lateral
+        function toggleMenu() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+ 
+
         class Produto {
             constructor() {
                 this.arrayProdutos = JSON.parse(localStorage.getItem('produtos')) || [];
@@ -144,47 +180,46 @@
             }
 
             adicionarItem() {
-                // Lê os dados do formulário e adiciona à lista temporária
-                let produto = this.lerDados();
+    let produto = this.lerDados();
 
-                if (this.validaDados(produto)) {
-                    produto.id = this.id++;
-                    this.tempProdutos.push(produto);
-                    this.listarTabela(this.tempProdutos);
-                    this.cancelar();
-                } else {
-                    alert(this.msgErro);
-                }
-            }
+    if (this.validaDados(produto)) {
+        // Verifica se já existe um produto com o mesmo nome, categoria e preço
+        const produtoExistente = this.arrayProdutos.find(p => 
+            p.nomeProduto === produto.nomeProduto &&
+            p.categoria === produto.categoria &&
+            p.preco === produto.preco
+        );
 
-            salvarNoBanco() {
-                // Envia todos os itens da lista temporária para o banco
-                if (this.tempProdutos.length === 0) {
-                    alert("Nenhum produto para salvar.");
-                    return;
-                }
+        if (produtoExistente) {
+            // Se o produto já existir, soma a quantidade e atualiza o valor total
+            produtoExistente.quantidade += produto.quantidade;
+            produtoExistente.valorTotal = produtoExistente.preco * produtoExistente.quantidade;
+        } else {
+            // Se não existir, adiciona um novo produto com um id único
+            produto.id = this.id++;
+            this.arrayProdutos.push(produto);
+        }
 
-                fetch('/api/produtos', { // Exemplo de endpoint
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(this.tempProdutos)
-                })
-                .then(response => {
-                    if (response.ok) {
-                        alert("Produtos salvos com sucesso!");
-                        this.arrayProdutos = this.arrayProdutos.concat(this.tempProdutos); // Atualiza o array principal
-                        this.tempProdutos = []; // Limpa a lista temporária após salvar
-                        this.salvarLocalStorage();
-                        this.listarTabela();
-                    } else {
-                        alert("Erro ao salvar produtos.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao conectar ao servidor:", error);
-                    alert("Erro ao conectar ao servidor.");
-                });
-            }
+        // Adiciona o produto à lista temporária (tempProdutos)
+        this.tempProdutos.push(produto);  // Aqui está o ajuste
+
+        // Atualiza a tabela de exibição
+        this.listarTabela();  
+        
+        // Salva as alterações no LocalStorage
+        this.salvarLocalStorage(); 
+        
+        // Limpa os campos do formulário
+        this.cancelar(); 
+    } else {
+        alert(this.msgErro);
+    }
+}
+
+salvarNoBanco(){
+    alert("oiiii");
+}
+
 
             lerDados() {
                 let produto = {};
@@ -247,6 +282,7 @@
                 document.getElementById('preco').value = produto.preco;
                 document.getElementById('quantidade').value = produto.quantidade;
                 document.getElementById('categoria').value = produto.categoria;
+
             }
 
             excluir(id) {
@@ -304,8 +340,10 @@
                 localStorage.setItem('produtos', JSON.stringify(this.arrayProdutos));
             }
         }
+        
 
         const produto = new Produto();
+        
     </script>
 </body>
 </html>

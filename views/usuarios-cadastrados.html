@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuários Cadastrados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/menu-adm.css">
+   
+</head>
+<style>
+      table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+            main {
+    margin-left: 250px; /* Deixa espaço para a sidebar */
+    padding: 20px;
+    background-color: #f5f5f5; /* Cor de fundo leve */
+    height: 100vh;
+    overflow-y: auto;
+}
+@media (max-width: 768px) {
+    main {
+        margin-left: 0; /* O conteúdo ocupa 100% quando a sidebar está escondida */
+    }
+ }
+</style>
+<body>
+     <!-- Botão de toggle do menu -->
+     <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+     <!-- Menu lateral -->
+     <div class="sidebar" id="sidebar">
+         <h2>Admin</h2>
+         <ul>
+             <li><a href="/views/dashboardAdmin.html">Dashboard</a></li>
+             <li><a href="/views/relatorio.html">Relatórios</a></li>
+             <li><a href="/views/usuarios-cadastrados.html">Usuários Cadastrados</a></li>
+             <li><a href="/views/testedados.html">Tabela de Estoque</a></li>
+             <li><a href="/views/adicionar-produto.html">Adicionar Produtos</a></li>
+             <li><a href="/views/form.html">Repositório</a></li>
+             <li><a href="/">Site</a></li>
+             
+            
+         </ul>
+     </div>
+
+    <main>
+        <div class="container mt-5">
+            <h1>Usuários Cadastrados</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-usuarios">
+                    <!-- Os dados serão inseridos aqui pelo JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+    </main>
+    <!-- Bootstrap JS (opcional, mas útil para interação com o frontend) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.5/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+              // Função para alternar a visibilidade da barra lateral
+              function toggleMenu() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+        // Função para carregar os dados dos usuários cadastrados
+        async function carregarUsuarios() {
+            try {
+                const response = await fetch('/api/cadastro'); // Chama a API de cadastro
+                const usuarios = await response.json(); // Converte a resposta para JSON
+                
+                // Seleciona a tabela onde os dados serão exibidos
+                const tabela = document.getElementById('tabela-usuarios');
+                
+                // Limpa a tabela antes de adicionar os dados
+                tabela.innerHTML = '';
+
+                // Para cada usuário, cria uma nova linha na tabela
+                usuarios.forEach(usuario => {
+                    const row = document.createElement('tr'); // Cria uma nova linha na tabela
+
+                    // Cria as células para cada coluna
+                    const cellNome = document.createElement('td');
+                    cellNome.textContent = usuario.nome;
+
+                    const cellEmail = document.createElement('td');
+                    cellEmail.textContent = usuario.email;
+
+                    // Adiciona as células na linha
+                    row.appendChild(cellNome);
+                    row.appendChild(cellEmail);
+
+                    // Adiciona a linha na tabela
+                    tabela.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar os dados dos usuários:', error);
+            }
+        }
+
+        // Carrega os dados quando a página for carregada
+        window.onload = carregarUsuarios;
+    </script>
+</body>
+</html>

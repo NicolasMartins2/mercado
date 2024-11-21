@@ -1,0 +1,74 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header {
+    background-color: #ffffff;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #ffffff;
+}
+
+.square-container {
+    width: 400px; /* Defina a largura do quadrado */
+    height: 400px; /* Defina a altura do quadrado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #faf8f8; /* Cor de fundo do quadrado */
+    border: 1px solid #ccc; /* Opcional: borda do quadrado */
+    border-radius: 8px; /* Cantos arredondados, se desejado */
+    overflow: hidden; /* Garante que nada ultrapasse o quadrado */
+  }
+  
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%; /* Garante que ocupe todo o espaço do quadrado */
+    height: auto;
+  }
+  
+  .image-container img {
+    width: 100px; /* Tamanho da imagem */
+    height: auto;
+    border-radius: 8px; /* Cantos arredondados */
+  }
+  
+  .text-container {
+    max-width: 50%;
+    text-align: left;
+  }
+  
+  .text-container h2 {
+    font-size: 1.5rem;
+    color: #4A4A8C;
+  }
+  
+  .text-container p {
+    color: #6b6b6b;
+    line-height: 1.6;
+  }
+  
+  .text-container button {
+    background-color: #4A4A8C;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .text-container button:hover {
+    background-color: #3a3a6c;
+  }
+  
