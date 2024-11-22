@@ -12,13 +12,47 @@
     <title>Header Mercado</title>
 </head>
 <body>
+    <style>
+        .search-results {
+    position: absolute; /* Alinha resultados dentro do contêiner */
+    top: calc(100% - 590px); /* Posiciona logo abaixo da barra com espaçamento */
+    left: 0;
+    width: 40%; /* Alinha com a largura da barra */
+    margin-left: 17rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    font-size: 14px;
+    display: none; /* Oculta os resultados inicialmente */
+}
+
+.search-results div {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-results div:last-child {
+    border-bottom: none;
+}
+
+.search-results div:hover {
+    background-color: #f9f9f9;
+}
+    </style>
     <header class="header">
         <div class="header-top">
             <a href="/"><img src="/img/logo-nativa.jpg" alt="Logo" class="logo"></a>
             <div class="search-bar">
-                <input type="text" placeholder="Pesquisa por produtos ou marcas">
-                <button><i class="fas fa-search"></i></button>
+                <input id="searchInput" type="text" placeholder="Pesquisa por produtos ou marcas">
+                <button onclick="searchItems()"><i class="fas fa-search"></i></button>
             </div>
+            <div id="results" class="search-results"></div>
             <button class="app-button">Baixe o App Meu Atacadão</button>
             <div class="user-options">
                <a href="/views/suporte.html"><i class="fa-solid fa-circle-info"></i>Suporte</a>
@@ -73,78 +107,80 @@
 </div>
 
 <div class="product-container" id="productContainer">
-    <div class="product" data-name="Sabonete Líquido 5L" data-price="1600">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://drogariasp.vtexassets.com/arquivos/ids/779579/578525---sabonete-liquido-johnsons-baby-da-cabeca-aos-pes-400ml.jpg?v=637998082355830000" alt="Carne 2kg">
+    <div class="product" data-name="Sabonete Líquido 5L" data-price="16.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://drogariasp.vtexassets.com/arquivos/ids/779579/578525---sabonete-liquido-johnsons-baby-da-cabeca-aos-pes-400ml.jpg?v=637998082355830000" alt="Sabonete Líquido 5L">
         <h2>Sabonete Líquido 5L</h2>
         <p class="price">R$ 16,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Papel Higiênico Personal" data-price="500">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://cdn.awsli.com.br/600x450/608/608010/produto/27871883/b729f3c80b.jpg" alt="Feijão 1kg">
+    <div class="product" data-name="Papel Higiênico Personal" data-price="5.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://cdn.awsli.com.br/600x450/608/608010/produto/27871883/b729f3c80b.jpg" alt="Papel Higiênico Personal">
         <h2>Papel Higiênico Personal</h2>
         <p class="price">R$ 5,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Bucha Vegetal " data-price="2500">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://cdn.awsli.com.br/290/290480/produto/109284587/53ca351928.jpg" alt="Açúcar 1kg">
-        <h2>Bucha Vegetal </h2>
+    <div class="product" data-name="Bucha Vegetal" data-price="25.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://cdn.awsli.com.br/290/290480/produto/109284587/53ca351928.jpg" alt="Bucha Vegetal">
+        <h2>Bucha Vegetal</h2>
         <p class="price">R$ 25,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Inseticida Spray 300ml" data-price="2100">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAr-av8mBDfzEdB61TYgVHXUS17_S-35B7kg&s" alt="Macarrão 500g">
+    <div class="product" data-name="Inseticida Spray 300ml" data-price="21.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAr-av8mBDfzEdB61TYgVHXUS17_S-35B7kg&s" alt="Inseticida Spray 300ml">
         <h2>Inseticida Spray 300ml</h2>
         <p class="price">R$ 21,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Lenço Umedecido" data-price="2900">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F8304782.webp%3Fwidth%3D450%26height%3D450%26quality%3D85%26type%3Dresize&w=640&q=85" alt="Macarrão 500g">
+    <div class="product" data-name="Lenço Umedecido" data-price="29.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://www.drogasil.com.br/_next/image?url=https%3A%2F%2Fproduct-data.raiadrogasil.io%2Fimages%2F8304782.webp%3Fwidth%3D450%26height%3D450%26quality%3D85%26type%3Dresize&w=640&q=85" alt="Lenço Umedecido">
         <h2>Lenço Umedecido</h2>
         <p class="price">R$ 29,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Pasta de Dente Colgate " data-price="300">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://dmvfarma.vtexassets.com/arquivos/ids/250576-800-auto?v=638569257770830000&width=800&height=auto&aspect=true" alt="Feijão 1kg">
-        <h2>Pasta de Dente Colgate </h2>
+    <div class="product" data-name="Pasta de Dente Colgate" data-price="3.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://dmvfarma.vtexassets.com/arquivos/ids/250576-800-auto?v=638569257770830000&width=800&height=auto&aspect=true" alt="Pasta de Dente Colgate">
+        <h2>Pasta de Dente Colgate</h2>
         <p class="price">R$ 3,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Máscara de Hidratação" data-price="6700">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://cdn.awsli.com.br/600x700/1767/1767569/produto/224994200/unnamed-4p7ic6abmr.jpg" alt="Açúcar 1kg">
+    <div class="product" data-name="Máscara de Hidratação" data-price="67.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://cdn.awsli.com.br/600x700/1767/1767569/produto/224994200/unnamed-4p7ic6abmr.jpg" alt="Máscara de Hidratação">
         <h2>Máscara de Hidratação</h2>
         <p class="price">R$ 67,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Shampoo Estimulante" data-price="2200">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://acdn.mitiendanube.com/stores/004/297/279/products/shampoo-estimulante-antiqueda-e-crescimento-lumina-321ee41857811f320817178678185784-480-0.jpg" alt="Macarrão 500g">
+    <div class="product" data-name="Shampoo Estimulante" data-price="22.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://acdn.mitiendanube.com/stores/004/297/279/products/shampoo-estimulante-antiqueda-e-crescimento-lumina-321ee41857811f320817178678185784-480-0.jpg" alt="Shampoo Estimulante">
         <h2>Shampoo Estimulante</h2>
         <p class="price">R$ 22,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Condicionador Fortificante" data-price="2490">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lsun6ogllv7f2a" alt="Macarrão 500g">
+    <div class="product" data-name="Condicionador Fortificante" data-price="24.90">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://down-br.img.susercontent.com/file/br-11134207-7r98o-lsun6ogllv7f2a" alt="Condicionador Fortificante">
         <h2>Condicionador Fortificante</h2>
         <p class="price">R$ 24,90</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Hidratante Corporal" data-price="1500">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://images.tcdn.com.br/img/img_prod/1142879/creme_hidratante_corporal_rosas_60g_jumi_193_1_4d616552aea8de8739d70124f43c7544.png" alt="Macarrão 500g">
+    <div class="product" data-name="Hidratante Corporal" data-price="15.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://images.tcdn.com.br/img/img_prod/1142879/creme_hidratante_corporal_rosas_60g_jumi_193_1_4d616552aea8de8739d70124f43c7544.png" alt="Hidratante Corporal">
         <h2>Hidratante Corporal</h2>
         <p class="price">R$ 15,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
+</div>
+
 
   
 

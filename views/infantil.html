@@ -12,13 +12,47 @@
     <title>Header Mercado</title>
 </head>
 <body>
+    <style>
+        .search-results {
+    position: absolute; /* Alinha resultados dentro do contêiner */
+    top: calc(100% - 590px); /* Posiciona logo abaixo da barra com espaçamento */
+    left: 0;
+    width: 40%; /* Alinha com a largura da barra */
+    margin-left: 17rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    font-size: 14px;
+    display: none; /* Oculta os resultados inicialmente */
+}
+
+.search-results div {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-results div:last-child {
+    border-bottom: none;
+}
+
+.search-results div:hover {
+    background-color: #f9f9f9;
+}
+    </style>
     <header class="header">
         <div class="header-top">
             <a href="/"><img src="/img/logo-nativa.jpg" alt="Logo" class="logo"></a>
             <div class="search-bar">
-                <input type="text" placeholder="Pesquisa por produtos ou marcas">
-                <button><i class="fas fa-search"></i></button>
+                <input id="searchInput" type="text" placeholder="Pesquisa por produtos ou marcas">
+                <button onclick="searchItems()"><i class="fas fa-search"></i></button>
             </div>
+            <div id="results" class="search-results"></div>
             <button class="app-button">Baixe o App Meu Atacadão</button>
             <div class="user-options">
                <a href="/views/suporte.html"><i class="fa-solid fa-circle-info"></i>Suporte</a>

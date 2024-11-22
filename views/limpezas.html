@@ -12,13 +12,45 @@
     <title>Header Mercado</title>
 </head>
 <body>
+    <style>.search-results {
+        position: absolute; /* Alinha resultados dentro do contêiner */
+        top: calc(100% - 590px); /* Posiciona logo abaixo da barra com espaçamento */
+        left: 0;
+        width: 40%; /* Alinha com a largura da barra */
+        margin-left: 17rem;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px 0;
+        max-height: 200px;
+        overflow-y: auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+        font-size: 14px;
+        display: none; /* Oculta os resultados inicialmente */
+    }
+    
+    .search-results div {
+        padding: 8px 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .search-results div:last-child {
+        border-bottom: none;
+    }
+    
+    .search-results div:hover {
+        background-color: #f9f9f9;
+    }</style>
     <header class="header">
         <div class="header-top">
             <a href="/"><img src="/img/logo-nativa.jpg" alt="Logo" class="logo"></a>
-            <div class="search-bar">
-                <input type="text" placeholder="Pesquisa por produtos ou marcas">
-                <button><i class="fas fa-search"></i></button>
+         <div class="search-bar">
+                <input id="searchInput" type="text" placeholder="Pesquisa por produtos ou marcas">
+                <button onclick="searchItems()"><i class="fas fa-search"></i></button>
             </div>
+            <div id="results" class="search-results"></div>
             <button class="app-button">Baixe o App Meu Atacadão</button>
             <div class="user-options">
                <a href="/views/suporte.html"><i class="fa-solid fa-circle-info"></i>Suporte</a>
@@ -80,71 +112,79 @@
         <p class="price">R$ 3,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Lava-Roupas Líquido 5 Litros" data-price="2450">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://images.tcdn.com.br/img/img_prod/1213476/lava_roupas_liquido_aquafast_multiacao_3_l_1543_1_fe27b7708b0c4dbb056d19fe71c317e5.jpg" alt="Feijão 1kg">
+    <div class="product" data-name="Lava-Roupas Líquido 5 Litros" data-price="24.50">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://images.tcdn.com.br/img/img_prod/1213476/lava_roupas_liquido_aquafast_multiacao_3_l_1543_1_fe27b7708b0c4dbb056d19fe71c317e5.jpg" alt="Lava-Roupas Líquido 5 Litros">
         <h2>Lava-Roupas Líquido 5 Litros</h2>
         <p class="price">R$ 24,50</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Amaciante para Roupas 1L" data-price="1500">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://www.empyre.com.br/uploads/images/cache/583-amaciante-de-roupas-giorno-lavanderia-classico-1l-1717158308-1000x1000-b4633702.webp" alt="Açúcar 1kg">
+    
+    <div class="product" data-name="Amaciante para Roupas 1L" data-price="15.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://www.empyre.com.br/uploads/images/cache/583-amaciante-de-roupas-giorno-lavanderia-classico-1l-1717158308-1000x1000-b4633702.webp" alt="Amaciante para Roupas 1L">
         <h2>Amaciante para Roupas 1L</h2>
         <p class="price">R$ 15,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Lava Roupas em Pó 1kg" data-price="599">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://m.media-amazon.com/images/I/81dRDMcB6TL.jpg" alt="Macarrão 500g">
+    
+    <div class="product" data-name="Lava Roupas em Pó 1kg" data-price="5.99">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://m.media-amazon.com/images/I/81dRDMcB6TL.jpg" alt="Lava Roupas em Pó 1kg">
         <h2>Lava Roupas em Pó 1kg</h2>
         <p class="price">R$ 5,99</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-
-    <div class="product" data-name="Esponja Multiuso" data-price="399">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://www.lotshomeshop.com.br/arquivos/ids/162448-1000-1000/Esponja-Multiuso-EsfreBom-Bettanin-Leve-4-Pague-3-still.jpg?v=638259072477430000" alt="Macarrão 500g">
+    
+    <div class="product" data-name="Esponja Multiuso" data-price="3.99">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://www.lotshomeshop.com.br/arquivos/ids/162448-1000-1000/Esponja-Multiuso-EsfreBom-Bettanin-Leve-4-Pague-3-still.jpg?v=638259072477430000" alt="Esponja Multiuso">
         <h2>Esponja Multiuso</h2>
         <p class="price">R$ 3,99</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Água Sanitária 5L" data-price="1200">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://images.tcdn.com.br/img/img_prod/746019/agua_sanitaria_5l_rajja_63_1_dd688935a1af92452ad570a274ace7c2.jpg" alt="Feijão 1kg">
+    
+    <div class="product" data-name="Água Sanitária 5L" data-price="12.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://images.tcdn.com.br/img/img_prod/746019/agua_sanitaria_5l_rajja_63_1_dd688935a1af92452ad570a274ace7c2.jpg" alt="Água Sanitária 5L">
         <h2>Água Sanitária 5L</h2>
         <p class="price">R$ 12,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Sabão em pó 800g" data-price="1400">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://s3.amazonaws.com/lepok.w/produtos/produtos/10809.webp" alt="Açúcar 1kg">
+    
+    <div class="product" data-name="Sabão em pó 800g" data-price="14.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://s3.amazonaws.com/lepok.w/produtos/produtos/10809.webp" alt="Sabão em pó 800g">
         <h2>Sabão em pó 800g</h2>
         <p class="price">R$ 14,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Limpador Multiuso 500ML" data-price="300">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZrP-QFdvzf-odnxAsHta0xMWNHxEjOaH4_w&s" alt="Macarrão 500g">
+    
+    <div class="product" data-name="Limpador Multiuso 500ML" data-price="3.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZrP-QFdvzf-odnxAsHta0xMWNHxEjOaH4_w&s" alt="Limpador Multiuso 500ML">
         <h2>Limpador Multiuso 500ML</h2>
         <p class="price">R$ 3,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-
-    <div class="product" data-name="Sabão em Barra 200G" data-price="300">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://cdn.awsli.com.br/800x800/1935/1935087/produto/100366574/sabao-barra-glicerinado-tradicional-5x200-a4ae127e.jpg" alt="Macarrão 500g">
+    
+    <div class="product" data-name="Sabão em Barra 200G" data-price="3.00">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://cdn.awsli.com.br/800x800/1935/1935087/produto/100366574/sabao-barra-glicerinado-tradicional-5x200-a4ae127e.jpg" alt="Sabão em Barra 200G">
         <h2>Sabão em Barra 200G</h2>
         <p class="price">R$ 3,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Saco para Lixo 30L" data-price="1350">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://images.tcdn.com.br/img/img_prod/1218555/saco_lixo_30l_pt_59x62_rolo_c_30_291_1_27fb25431e31dcd3d9100cbedae308d2.png" alt="Macarrão 500g">
+    
+    <div class="product" data-name="Saco para Lixo 30L" data-price="13.50">
+        <span class="highlight-badge">Destaque</span>
+        <img src="https://images.tcdn.com.br/img/img_prod/1218555/saco_lixo_30l_pt_59x62_rolo_c_30_291_1_27fb25431e31dcd3d9100cbedae308d2.png" alt="Saco para Lixo 30L">
         <h2>Saco para Lixo 30L</h2>
         <p class="price">R$ 13,50</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
+    
+    
 
   
 

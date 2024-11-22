@@ -1,74 +1,82 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4; 
+  font-family: Arial, sans-serif; 
 }
 
-.header {
-    background-color: #ffffff;
-}
+
 
 .header-top {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border-bottom: 1px solid #e5e5e5;
-    background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.square-container {
-    width: 400px; /* Defina a largura do quadrado */
-    height: 400px; /* Defina a altura do quadrado */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #faf8f8; /* Cor de fundo do quadrado */
-    border: 1px solid #ccc; /* Opcional: borda do quadrado */
-    border-radius: 8px; /* Cantos arredondados, se desejado */
-    overflow: hidden; /* Garante que nada ultrapasse o quadrado */
-  }
+.header-top .logo {
+  height: 150px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+.search-bar button {
+  background-color: #4c5788;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.header-bottom {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.header-bottom a {
   
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%; /* Garante que ocupe todo o espaço do quadrado */
-    height: auto;
-  }
-  
-  .image-container img {
-    width: 100px; /* Tamanho da imagem */
-    height: auto;
-    border-radius: 8px; /* Cantos arredondados */
-  }
-  
-  .text-container {
-    max-width: 50%;
-    text-align: left;
-  }
-  
-  .text-container h2 {
-    font-size: 1.5rem;
-    color: #4A4A8C;
-  }
-  
-  .text-container p {
-    color: #6b6b6b;
-    line-height: 1.6;
-  }
-  
-  .text-container button {
-    background-color: #4A4A8C;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .text-container button:hover {
-    background-color: #3a3a6c;
-  }
-  
+  text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Estilo do container */
+.container {
+  display: flex; 
+  align-items: center; 
+  background-color: #4c5788; 
+  color: #ffffff; 
+  border-radius: 10px; 
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  max-width: 800px; 
+  width: 90%; 
+  margin: 20px auto; 
+}
+
+/* Estilo da imagem */
+.image {
+  width: 150px; /* Largura da imagem */
+  height: auto; /* Mantém a proporção */
+  margin-right: 20px; /* Espaço entre a imagem e o texto */
+  border-radius: 8px; /* Arredonda as bordas da imagem */
+}
+
+/* Estilo do texto */
+.text {
+  font-size: 16px; /* Tamanho do texto */
+  line-height: 1.5; /* Espaçamento entre as linhas */
+}

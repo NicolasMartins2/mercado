@@ -115,16 +115,19 @@
             </div>
             <div class="lineInput">
                 <label>Quantidade</label>
-                <input type="number" id="quantidade" placeholder="Quantidade do produto" min="1" value="1">
+                <input type="number" id="estoque" placeholder="Quantidade do produto" min="1" value="1">
             </div>
             <div class="lineInput">
                 <label>Categoria</label>
                 <select id="categoria">
                     <option value="">Selecione uma categoria</option>
-                    <option value="Alimentos Básicos">Alimentos Básicos</option>
-                    <option value="Limpeza">Limpeza</option>
-                    <option value="Higiene">Higiene</option>
                     <option value="Bebidas">Bebidas</option>
+                    <option value="Alimentos Básicos">Alimentos Básicos</option>
+                    <option value="Limpeza">Produtos de Limpeza</option>
+                    <option value="Higiene">Higiene e Beleza</option>
+                    <option value="Essenciais em Pó">Essenciais em Pó</option>
+                    <option value="Laticínios e derivados">Laticínios e derivados</option>
+                    <option value="Infantil">Infantil</option>
                     <!-- Adicione mais opções conforme necessário -->
                 </select>
             </div>
@@ -192,8 +195,8 @@
 
         if (produtoExistente) {
             // Se o produto já existir, soma a quantidade e atualiza o valor total
-            produtoExistente.quantidade += produto.quantidade;
-            produtoExistente.valorTotal = produtoExistente.preco * produtoExistente.quantidade;
+            produtoExistente.estoque += produto.estoque;
+            produtoExistente.valorTotal = produtoExistente.preco * produtoExistente.estoque;
         } else {
             // Se não existir, adiciona um novo produto com um id único
             produto.id = this.id++;
@@ -216,8 +219,25 @@
     }
 }
 
-salvarNoBanco(){
-    alert("oiiii");
+async salvarNoBanco() {
+    try {
+        const response = await fetch('/salvar-produtos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ produtos: this.tempProdutos }),
+        });
+
+        if (response.ok) {
+            alert('Produtos salvos no banco de dados com sucesso!');
+            this.tempProdutos = []; // Limpa a lista temporária
+            this.arrayProdutos = [];
+        } else {
+            alert('Erro ao salvar os produtos no banco de dados.');
+        }
+    } catch (error) {
+        console.error('Erro ao salvar no banco:', error);
+        alert('Erro ao salvar os produtos no banco de dados.');
+    }
 }
 
 
@@ -225,9 +245,9 @@ salvarNoBanco(){
                 let produto = {};
                 produto.nomeProduto = document.getElementById('produto').value;
                 produto.preco = parseFloat(document.getElementById('preco').value);
-                produto.quantidade = parseInt(document.getElementById('quantidade').value);
+                produto.estoque = parseInt(document.getElementById('estoque').value);
                 produto.categoria = document.getElementById('categoria').value;
-                produto.valorTotal = produto.preco * produto.quantidade;
+                produto.valorTotal = produto.preco * produto.estoque;
                 return produto;
             }
 
@@ -241,7 +261,7 @@ salvarNoBanco(){
                     let td_id = tr.insertCell();
                     let td_produto = tr.insertCell();
                     let td_preco = tr.insertCell();
-                    let td_quantidade = tr.insertCell();
+                    let td_estoque = tr.insertCell();
                     let td_categoria = tr.insertCell();
                     let td_valorTotal = tr.insertCell();
                     let td_acoes = tr.insertCell();
@@ -249,7 +269,7 @@ salvarNoBanco(){
                     td_id.innerText = produtosFiltrados[i].id;
                     td_produto.innerText = produtosFiltrados[i].nomeProduto;
                     td_preco.innerText = `R$ ${produtosFiltrados[i].preco.toFixed(2)}`;
-                    td_quantidade.innerText = produtosFiltrados[i].quantidade;
+                    td_estoque.innerText = produtosFiltrados[i].estoque;
                     td_categoria.innerText = produtosFiltrados[i].categoria;
                     td_valorTotal.innerText = `R$ ${produtosFiltrados[i].valorTotal.toFixed(2)}`;
 
@@ -280,7 +300,7 @@ salvarNoBanco(){
 
                 document.getElementById('produto').value = produto.nomeProduto;
                 document.getElementById('preco').value = produto.preco;
-                document.getElementById('quantidade').value = produto.quantidade;
+                document.getElementById('estoque').value = produto.estoque;
                 document.getElementById('categoria').value = produto.categoria;
 
             }
@@ -297,7 +317,7 @@ salvarNoBanco(){
             cancelar() {
                 document.getElementById('produto').value = '';
                 document.getElementById('preco').value = '';
-                document.getElementById('quantidade').value = '1';
+                document.getElementById('estoque').value = '1';
                 document.getElementById('categoria').value = '';
                 this.editId = null;
             }
@@ -310,7 +330,7 @@ salvarNoBanco(){
                 if (isNaN(produto.preco) || produto.preco <= 0) {
                     msg += '- Informe um preço válido para o produto\n';
                 }
-                if (produto.quantidade <= 0 || isNaN(produto.quantidade)) {
+                if (produto.estoque <= 0 || isNaN(produto.estoque)) {
                     msg += '- Informe uma quantidade válida\n';
                 }
                 if (produto.categoria === '') {

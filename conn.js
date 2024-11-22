@@ -1,4 +1,4 @@
-// db.js
+
 const mysql = require('mysql2');
 
 // Cria uma pool de conexões para o banco de dados MySQL

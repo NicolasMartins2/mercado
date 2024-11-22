@@ -12,13 +12,48 @@
     <title>Header Mercado</title>
 </head>
 <body>
+    <style>
+
+.search-results {
+    position: absolute; /* Alinha resultados dentro do contêiner */
+    top: calc(100% - 590px); /* Posiciona logo abaixo da barra com espaçamento */
+    left: 0;
+    width: 40%; /* Alinha com a largura da barra */
+    margin-left: 17rem;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    font-size: 14px;
+    display: none; /* Oculta os resultados inicialmente */
+}
+
+.search-results div {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.search-results div:last-child {
+    border-bottom: none;
+}
+
+.search-results div:hover {
+    background-color: #f9f9f9;
+}
+    </style>
     <header class="header">
         <div class="header-top">
             <a href="/"><img src="/img/logo-nativa.jpg" alt="Logo" class="logo"></a>
             <div class="search-bar">
-                <input type="text" placeholder="Pesquisa por produtos ou marcas">
-                <button><i class="fas fa-search"></i></button>
+                <input id="searchInput" type="text" placeholder="Pesquisa por produtos ou marcas">
+                <button onclick="searchItems()"><i class="fas fa-search"></i></button>
             </div>
+            <div id="results" class="search-results"></div>
             <button class="app-button">Baixe o App Meu Atacadão</button>
             <div class="user-options">
                <a href="/views/suporte.html"><i class="fa-solid fa-circle-info"></i>Suporte</a>
@@ -73,83 +108,86 @@
 </div>
 
 <div class="product-container" id="productContainer">
-    <div class="product" data-name="Guaraná Antarctica 2L" data-price="850">
+    <div class="product" data-name="Guaraná Antarctica 2L" data-price="8.50">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/guarana.jpg" alt="Carne 2kg">
-        <h2> Guaraná Antarctica 2L</h2>
+        <img src="/img/guarana.jpg" alt="Guaraná 2L">
+        <h2>Guaraná Antarctica 2L</h2>
         <p class="price">R$ 8,50</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Coca-Cola 2 L" data-price="1100">
+    <div class="product" data-name="Coca-Cola 2L" data-price="11.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/coca.jpg" alt="Feijão 1kg">
-        <h2> Coca-Cola 2 L</h2>
+        <img src="/img/coca.jpg" alt="Coca-Cola 2L">
+        <h2>Coca-Cola 2L</h2>
         <p class="price">R$ 11,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Pepsi Black  2L" data-price="800">
+    <div class="product" data-name="Pepsi Black 2L" data-price="8.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/pepis.jpg" alt="Açúcar 1kg">
-        <h2> Pepsi Black 2L</h2>
+        <img src="/img/pepis.jpg" alt="Pepsi Black 2L">
+        <h2>Pepsi Black 2L</h2>
         <p class="price">R$ 8,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Del Valle Uva 1L" data-price="900">
+    <div class="product" data-name="Del Valle Uva 1L" data-price="9.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://static.clubeextra.com.br/img/uploads/1/7/25295007.png" alt="Macarrão 500g">
-        <h2> Del Valle Uva 1L</h2>
+        <img src="https://static.clubeextra.com.br/img/uploads/1/7/25295007.png" alt="Del Valle Uva 1L">
+        <h2>Del Valle Uva 1L</h2>
         <p class="price">R$ 9,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Suco de Uva e Maçã Integral 1,5 Litros" data-price="3000">
+    <div class="product" data-name="Suco de Uva e Maçã Integral 1,5L" data-price="30.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/uva e maça.jpg" alt="Macarrão 500g">
-        <h2>
-            Suco de Uva e Maçã 1,5 Litros</h2><p class="price">R$ 30,00</p>
+        <img src="/img/uva e maça.jpg" alt="Suco de Uva e Maçã">
+        <h2>Suco de Uva e Maçã Integral 1,5L</h2>
+        <p class="price">R$ 30,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    
-    <div class="product" data-name="Água Com Gás 1,5L" data-price="350">
+
+    <div class="product" data-name="Água Com Gás 1,5L" data-price="3.50">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/agua.jpg" alt="Feijão 1kg">
+        <img src="/img/agua.jpg" alt="Água Com Gás 1,5L">
         <h2>Água Mineral Crystal Com Gás 1,5L</h2>
         <p class="price">R$ 3,50</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Água de Coco 1 Litro" data-price="850">
+    <div class="product" data-name="Água de Coco 1L" data-price="8.50">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/coco.jfif" alt="Açúcar 1kg">
-        <h2>Água de Coco 1 Litro</h2>
+        <img src="/img/coco.jfif" alt="Água de Coco 1L">
+        <h2>Água de Coco 1L</h2>
         <p class="price">R$ 8,50</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
-    <div class="product" data-name="Heineken Lata " data-price="400">
+
+    <div class="product" data-name="Heineken Lata" data-price="4.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="/img/heneke.jfif" alt="Macarrão 500g">
-        <h2>Heineken Lata </h2>
+        <img src="/img/heneke.jfif" alt="Heineken Lata">
+        <h2>Heineken Lata</h2>
         <p class="price">R$ 4,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
 
-    <div class="product" data-name="Whisky Jack Daniel’s 1L" data-price="17000">
+    <div class="product" data-name="Whisky Jack Daniel’s 1L" data-price="100.00">
         <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://images.tcdn.com.br/img/img_prod/1080087/90_jack_daniels_fire_1l_2013169_1_36a466d29cbdec7972bc5ff1ce1c1844.jpg" alt="Macarrão 500g">
+        <img src="https://images.tcdn.com.br/img/img_prod/1080087/90_jack_daniels_fire_1l_2013169_1_36a466d29cbdec7972bc5ff1ce1c1844.jpg" alt="Whisky Jack Daniel’s 1L">
         <h2>Whisky Jack Daniel’s 1L</h2>
-        <p class="price">R$ 170,00</p>
-        <button class="pay-button">Adicionar ao Carrinho</button>
-    </div>
-    <div class="product" data-name="Gin Beefeater London" data-price="10000">
-        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
-        <img src="https://m.media-amazon.com/images/I/5164ZWp5jDL.jpg" alt="Macarrão 500g">
-        <h2>Gin Beefeater London</h2>
         <p class="price">R$ 100,00</p>
         <button class="pay-button">Adicionar ao Carrinho</button>
     </div>
+
+    <div class="product" data-name="Gin Beefeater London" data-price="85.00">
+        <span class="highlight-badge">Destaque</span> <!-- Selo de Destaque -->
+        <img src="https://m.media-amazon.com/images/I/5164ZWp5jDL.jpg" alt="Gin Beefeater London">
+        <h2>Gin Beefeater London</h2>
+        <p class="price">R$ 85,00</p>
+        <button class="pay-button">Adicionar ao Carrinho</button>
+    </div>
+</div>
 
   
 
